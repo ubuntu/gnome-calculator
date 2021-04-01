@@ -1,0 +1,81 @@
+name: gnome-calculator
+adopt-info: gnome-calculator
+summary: GNOME Calculator
+description: |
+  GNOME Calculator is an application that solves mathematical equations.
+  Though it at first appears to be a simple calculator with only basic
+  arithmetic operations, you can switch into Advanced, Financial, or
+  Programming mode to find a surprising set of capabilities.
+
+  The Advanced calculator supports many operations, including:
+  logarithms, factorials, trigonometric and hyperbolic functions,
+  modulus division, complex numbers, random number generation, prime
+  factorization and unit conversions.
+
+  Financial mode supports several computations, including periodic interest
+  rate, present and future value, double declining and straight line
+  depreciation, and many others.
+
+  Programming mode supports conversion between common bases (binary, octal,
+  decimal, and hexadecimal), boolean algebra, one’s and two’s complementation,
+  character to character code conversion, and more.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict
+base: core20
+
+slots:
+  # for GtkApplication registration
+  gnome-calculator:
+    interface: dbus
+    bus: session
+    name: org.gnome.Calculator
+
+apps:
+  gnome-calculator:
+    command: usr/bin/gnome-calculator
+    extensions: [gnome-3-38]
+    plugs:
+      - gsettings
+      - network
+      - network-status
+    desktop: usr/share/applications/org.gnome.Calculator.desktop
+    common-id: org.gnome.Calculator.desktop
+
+parts:
+  gnome-calculator:
+    source: https://gitlab.gnome.org/GNOME/gnome-calculator.git
+    plugin: meson
+    meson-parameters:
+      - --prefix=/snap/gnome-calculator/current/usr
+      - -Dvala_args="--vapidir=$SNAPCRAFT_STAGE/usr/share/vala/vapi"
+      - -Ddisable-introspection=true
+    organize:
+      snap/gnome-calculator/current/usr: usr
+    build-packages:
+      - libmpc-dev
+      - libmpfr-dev
+      - libgvc6
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(git describe --tags --abbrev=10)
+    override-build: |
+      set -eux
+      sed -i.bak -e "s|subdir('doc')||g" $SNAPCRAFT_PART_SRC/meson.build
+      sed -i.bak -e 's|Icon=org.gnome.Calculator$|Icon=${SNAP}/meta/gui/org.gnome.Calculator.svg|g' $SNAPCRAFT_PART_SRC/data/org.gnome.Calculator.desktop.in
+      sed -i.bak -e 's|media: gnome_calculator_help_media|media: gnome_calculator_help_media, symlink_media: false|g' $SNAPCRAFT_PART_SRC/help/meson.build
+      snapcraftctl build
+      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
+      cp $SNAPCRAFT_PART_SRC/data/icons/hicolor/scalable/apps/org.gnome.Calculator.svg $SNAPCRAFT_PART_INSTALL/meta/gui/
+
+  # Find files provided by the base and platform snap and ensure they aren't
+  # duplicated in this snap
+  cleanup:
+    after: [gnome-calculator]
+    plugin: nil
+    build-snaps: [core20, gtk-common-themes, gnome-3-38-2004/latest/candidate]
+    override-prime: |
+      set -eux
+      for snap in "core20" "gtk-common-themes" "gnome-3-38-2004"; do
+        cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
+      done
