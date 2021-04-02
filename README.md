@@ -49,5 +49,6 @@ git branch -u myfork/my-bugfix-branch
 ```
 
 3. When you feel they're ready for submitting to the main repository (edge branch), [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `ubuntu/edge` branch.
+4. Once you've opened the pull request, it will automatically trigger the build-test action that will launch a build of the snap. You can watch the progress of the snap build from your pull request (Show all checks -> Details). Once the snap build has completed, you can find the built snap (to test with) under "Artifacts".
 4. Someone from the team will review the open pull request and either merge it or start a discussion with you with additional changes or clarification needed.
-5. Once the pull request has been merged into the edge branch, there is a GitHub action that will launch a final build on launchpad, which will then automatically upload to the [snap store](https://snapcraft.io/gnome-calculator) into the edge channel.
+5. Once the pull request has been merged into the edge branch, then on the next git mirror sync (every 4 hours), launchpad will trigger a build of the snap that gets published to the [snap store](https://snapcraft.io/gnome-calculator) into the edge channel.
