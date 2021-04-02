@@ -30,10 +30,10 @@ git fetch --all -p
 
 Now that your git metadata has been updated you are ready to create a bugfix branch, make your changes, and open a pull request.
 
-1. All pull requests should go to the edge branch so checkout the edge branch:
+1. All pull requests should go to the stable branch so create your branch as a copy of the stable branch:
 
 ```
-git checkout -b my-bugfix-branch ubuntu/edge
+git checkout -b my-bugfix-branch ubuntu/stable
 ```
 
 2. Make your desired changes and push them to your fork:
@@ -48,7 +48,7 @@ Once this branch has been pushed to your fork, you should update the local branc
 git branch -u myfork/my-bugfix-branch
 ```
 
-3. When you feel they're ready for submitting to the main repository (edge branch), [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `ubuntu/edge` branch.
+3. When you feel they're ready for submitting to the main repository (stable branch), [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `ubuntu/stable` branch.
 4. Once you've opened the pull request, it will automatically trigger the build-test action that will launch a build of the snap. You can watch the progress of the snap build from your pull request (Show all checks -> Details). Once the snap build has completed, you can find the built snap (to test with) under "Artifacts".
 4. Someone from the team will review the open pull request and either merge it or start a discussion with you with additional changes or clarification needed.
-5. Once the pull request has been merged into the edge branch, then on the next git mirror sync (every 4 hours), launchpad will trigger a build of the snap that gets published to the [snap store](https://snapcraft.io/gnome-calculator) into the edge channel.
+5. Once the pull request has been merged into the stable branch, then on the next git mirror sync (every 4 hours), launchpad will trigger [a build of the snap that gets published](https://launchpad.net/~desktop-snappers/+snap/gnome-calculator-stable) to the [snap store](https://snapcraft.io/gnome-calculator) into the *candidate* channel. After sufficient testing of the snap from the candidate channel, then the reviewer (a Collaborator of the snap in the store) will promote the snap to the stable branch in the snap store.
