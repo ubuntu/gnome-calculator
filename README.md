@@ -36,6 +36,18 @@ Now that your git metadata has been updated you are ready to create a bugfix bra
 git checkout -b my-bugfix-branch ubuntu/edge
 ```
 
-2. Make your desired changes. When you feel they're ready for submitting to the main repository (edge branch), [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `ubuntu/edge` branch.
-3. Someone from the team will review the open pull request and either merge it or start a discussion with you with additional changes or clarification needed.
-4. Once the pull request has been merged into the edge branch, there is a GitHub action that will launch a final build on launchpad, which will then automatically upload to the [snap store](https://snapcraft.io/gnome-calculator) into the edge channel.
+2. Make your desired changes and push them to your fork:
+
+```
+git push myfork my-bugfix-branch
+```
+
+Once this branch has been pushed to your fork, you should update the local branch tracking so it tracks the branch pushed to your fork:
+
+```
+git branch -u myfork/my-bugfix-branch
+```
+
+3. When you feel they're ready for submitting to the main repository (edge branch), [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `ubuntu/edge` branch.
+4. Someone from the team will review the open pull request and either merge it or start a discussion with you with additional changes or clarification needed.
+5. Once the pull request has been merged into the edge branch, there is a GitHub action that will launch a final build on launchpad, which will then automatically upload to the [snap store](https://snapcraft.io/gnome-calculator) into the edge channel.
