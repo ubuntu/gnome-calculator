@@ -3,7 +3,7 @@
 [![gnome-calculator](https://snapcraft.io/gnome-calculator/badge.svg)](https://snapcraft.io/gnome-calculator)
 [![gnome-calculator](https://snapcraft.io/gnome-calculator/trending.svg?name=0)](https://snapcraft.io/gnome-calculator)
 
-Below you will find some instructions to help you contribute to this snap. The general workflow will be to submit pull requests from your fork onto the edge branch. Once the pull request has been merged into edge, there is a GitHub action that will automatically launch a build of the snap that will be available once it's completed (not sure where exactly this is visible from).
+Below you will find some instructions to help you contribute to this snap. The general workflow will be to submit pull requests from your fork onto the stable branch. Once the pull request has been merged into edge, there is a GitHub action that will automatically launch a build of the snap that will be available once it's completed (not sure where exactly this is visible from).
 
 ## How to contribute to this snap
 
