@@ -60,7 +60,9 @@ parts:
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags --abbrev=10)
+      # valadoc fails, but we don't need it in the snap anyway
       sed -i.bak -e "s|subdir('doc')||g" $SNAPCRAFT_PART_SRC/meson.build
+      # Don't symlink media it leaves dangling symlinks in the snap
       sed -i.bak -e 's|media: gnome_calculator_help_media|media: gnome_calculator_help_media, symlink_media: false|g' $SNAPCRAFT_PART_SRC/help/meson.build
 
   # Find files provided by the base and platform snap and ensure they aren't
