@@ -36,9 +36,16 @@ Now that your git metadata has been updated you are ready to create a bugfix bra
 git checkout -b my-bugfix-branch ubuntu/stable
 ```
 
-2. Make your desired changes and push them to your fork:
+2. Make your desired changes and build a snap locally for testing:
 
 ```
+snapcraft --use-lxd
+```
+
+3. After you are happy with your changes, commit them and push them to your fork:
+
+```
+git commit -a
 git push myfork my-bugfix-branch
 ```
 
@@ -48,7 +55,7 @@ Once this branch has been pushed to your fork, you should update the local branc
 git branch -u myfork/my-bugfix-branch
 ```
 
-3. When you feel they're ready for submitting to the main repository (stable branch), [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `ubuntu/stable` branch.
-4. Once you've opened the pull request, it will automatically trigger the build-test action that will launch a build of the snap. You can watch the progress of the snap build from your pull request (Show all checks -> Details). Once the snap build has completed, you can find the built snap (to test with) under "Artifacts".
-4. Someone from the team will review the open pull request and either merge it or start a discussion with you with additional changes or clarification needed.
-5. Once the pull request has been merged into the stable branch, then on the next git mirror sync (every 4 hours), launchpad will trigger [a build of the snap that gets published](https://launchpad.net/~desktop-snappers/gnome-calculator/+snap/gnome-calculator-stable) to the [snap store](https://snapcraft.io/gnome-calculator) into the *candidate* channel. After sufficient testing of the snap from the candidate channel, then the reviewer (a Collaborator of the snap in the store) will promote the snap to the stable branch in the snap store.
+4. When you feel they're ready for submitting to the main repository (stable branch), [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `ubuntu/stable` branch.
+5. Once you've opened the pull request, it will automatically trigger the build-test action that will launch a build of the snap. You can watch the progress of the snap build from your pull request (Show all checks -> Details). Once the snap build has completed, you can find the built snap (to test with) under "Artifacts".
+6. Someone from the team will review the open pull request and either merge it or start a discussion with you with additional changes or clarification needed.
+7. Once the pull request has been merged into the stable branch, then on the next git mirror sync (every 4 hours), launchpad will trigger [a build of the snap that gets published](https://launchpad.net/~desktop-snappers/gnome-calculator/+snap/gnome-calculator-stable) to the [snap store](https://snapcraft.io/gnome-calculator) into the *candidate* channel. After sufficient testing of the snap from the candidate channel, then the reviewer (a Collaborator of the snap in the store) will promote the snap to the stable branch in the snap store.
