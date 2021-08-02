@@ -22,7 +22,7 @@ description: |
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core20
+base: core18
 
 slots:
   # for GtkApplication registration
@@ -34,7 +34,7 @@ slots:
 apps:
   gnome-calculator:
     command: usr/bin/gnome-calculator
-    extensions: [gnome-3-38]
+    extensions: [gnome-3-34]
     plugs:
       - gsettings
       - network
@@ -43,7 +43,21 @@ apps:
     common-id: org.gnome.Calculator.desktop
 
 parts:
+  libhandy:
+    source: https://gitlab.gnome.org/GNOME/libhandy.git
+    source-branch: 'libhandy-1-0'
+    source-depth: 1
+    plugin: meson
+    meson-parameters:
+      - --prefix=/usr
+      - --buildtype=release
+      - -Dgtk_doc=false
+      - -Dtests=false
+      - -Dexamples=false
+      - -Dglade_catalog=disabled
+ 
   gnome-calculator:
+    after: [ libhandy ]
     source: https://gitlab.gnome.org/GNOME/gnome-calculator.git
     source-branch: 'gnome-40'
     plugin: meson
@@ -76,9 +90,9 @@ parts:
   cleanup:
     after: [gnome-calculator]
     plugin: nil
-    build-snaps: [core20, gtk-common-themes, gnome-3-38-2004/latest/candidate]
+    build-snaps: [core18, gtk-common-themes, gnome-3-34-1804/latest/candidate]
     override-prime: |
       set -eux
-      for snap in "core20" "gtk-common-themes" "gnome-3-38-2004"; do
+      for snap in "core18" "gtk-common-themes" "gnome-3-34-1804"; do
         cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
