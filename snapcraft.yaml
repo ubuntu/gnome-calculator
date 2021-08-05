@@ -71,6 +71,7 @@ parts:
       - libmpc-dev
       - libmpfr-dev
       - libgvc6
+      - libdevhelp-dev
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags --abbrev=10)
