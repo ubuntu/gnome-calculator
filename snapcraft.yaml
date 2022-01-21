@@ -45,7 +45,7 @@ apps:
 parts:
   gnome-calculator:
     source: https://gitlab.gnome.org/GNOME/gnome-calculator.git
-    source-branch: 'gnome-40'
+    source-branch: 'gnome-41'
     plugin: meson
     meson-parameters:
       - --prefix=/snap/gnome-calculator/current/usr
