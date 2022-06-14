@@ -53,10 +53,19 @@ parts:
       - python3-pip
       - ninja-build
 
+  libraries:
+    plugin: nil
+    stage-packages:
+      - libgtksourceview-4-0
+      - libadwaita-1-0
+    prime:
+      - usr/lib/*/libgtksource*
+      - usr/lib/*/libadwaita*
+
   gnome-calculator:
     after: [ meson-deps ]
     source: https://gitlab.gnome.org/GNOME/gnome-calculator.git
-    source-branch: 'gnome-41'
+    source-branch: 'gnome-42'
     plugin: meson
     meson-parameters:
       - --prefix=/snap/gnome-calculator/current/usr
@@ -69,6 +78,8 @@ parts:
       - libmpc-dev
       - libmpfr-dev
       - libgvc6
+      - libgtksourceview-4-dev
+      - libadwaita-1-dev
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=10)
