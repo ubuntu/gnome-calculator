@@ -56,10 +56,8 @@ parts:
   libraries:
     plugin: nil
     stage-packages:
-      - libgtksourceview-4-0
       - libadwaita-1-0
     prime:
-      - usr/lib/*/libgtksource*
       - usr/lib/*/libadwaita*
 
   gnome-calculator:
@@ -78,7 +76,6 @@ parts:
       - libmpc-dev
       - libmpfr-dev
       - libgvc6
-      - libgtksourceview-4-dev
       - libadwaita-1-dev
     override-pull: |
       craftctl default
