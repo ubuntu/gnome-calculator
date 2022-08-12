@@ -45,7 +45,7 @@ apps:
 parts:
   gnome-calculator:
     source: https://gitlab.gnome.org/GNOME/gnome-calculator.git
-    source-tag: '42.1'
+    source-tag: '42.2'
     plugin: meson
     parse-info: [usr/share/metainfo/org.gnome.Calculator.appdata.xml]
     meson-parameters:
