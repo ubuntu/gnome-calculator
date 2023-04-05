@@ -13,6 +13,6 @@ jobs:
       - name: checkout this repo
         uses: actions/checkout@v3
       - id: foo
-        uses: ubuntu/desktop-snaps/.github/actions/action.yaml@b62b2e0c24234325ee646fd0eff9940c12ea47c2
+        uses: ubuntu/desktop-snaps/.github/actions/action.yml@b62b2e0c24234325ee646fd0eff9940c12ea47c2
         with:
           repo: ${{ github.repository }}
