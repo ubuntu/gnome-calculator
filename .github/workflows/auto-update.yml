@@ -1,9 +1,9 @@
 name: Open a PR if a new update is available
 
 on:
-  push:
-    branches:
-      add-workflow
+  schedule:
+    # Daily for now
+    - cron: '9 7 * * *'
   workflow_dispatch:
 
 jobs:
