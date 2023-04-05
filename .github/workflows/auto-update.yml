@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: foo
-        uses: ubuntu/desktop-snaps/action.yml@add-action
+        uses: actions/ubuntu/desktop-snaps/action.yml@add-action
         with:
           repo: ${{ github.repository }}
