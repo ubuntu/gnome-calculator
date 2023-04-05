@@ -1,0 +1,18 @@
+name: Open a PR if a new update is available
+
+on:
+  push:
+    branches:
+      add-workflow
+  workflow_dispatch:
+
+jobs:
+  update-snapcraft-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout this repo
+        uses: actions/checkout@v3
+      - id: foo
+        uses: actions/desktop-snaps@b62b2e0
+        with:
+          repo: ${{ github.repository }}
