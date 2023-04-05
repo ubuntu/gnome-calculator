@@ -10,9 +10,8 @@ jobs:
   update-snapcraft-yaml:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout this repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - id: foo
-        uses: ubuntu/desktop-snaps/action.yml@b62b2e0c24234325ee646fd0eff9940c12ea47c2
+        uses: ubuntu/desktop-snaps/action.yml@add-action
         with:
           repo: ${{ github.repository }}
