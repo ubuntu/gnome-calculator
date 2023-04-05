@@ -12,17 +12,18 @@ jobs:
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v3
-      - name: Checkout action repo
-        uses: actions/checkout@v3
-        with:
-          repository: ubuntu/desktop-snaps
-          ref: 2c71252b8f3c4d726694220de15b04174a89db75
-          path: ./.github/actions/desktop-snaps-repo
-      - name: make sure we actually checked out the desktop-snaps repo
-        run: |
-          ls
-          ls ./.github/actions/desktop-snaps-repo
+#      - name: Checkout action repo
+#        uses: actions/checkout@v3
+#        with:
+#          repository: ubuntu/desktop-snaps
+#          ref: 2c71252b8f3c4d726694220de15b04174a89db75
+#          path: ./.github/actions/desktop-snaps-repo
+#      - name: make sure we actually checked out the desktop-snaps repo
+#        run: |
+#          ls
+#          ls ./.github/actions/desktop-snaps-repo
       - name: Run desktop-snaps action  
-        uses: ./.github/actions/desktop-snaps-repo/action.yml
+#        uses: ./.github/actions/desktop-snaps-repo/action.yml
+        uses: ubuntu/desktop-snaps@add-action
         with:
           repo: ${{ github.repository }}
