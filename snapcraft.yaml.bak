@@ -1,7 +1,3 @@
-[2K[2K[2KUpdating 'gnome-calculator' from version '42.2' to version '44.0'
-
-
-
 name: gnome-calculator
 adopt-info: gnome-calculator
 summary: GNOME Calculator
@@ -49,10 +45,37 @@ apps:
 parts:
   gnome-calculator:
     source: https://gitlab.gnome.org/GNOME/gnome-calculator.git
-    source-tag: '44.0'
+    source-tag: '42.2'
 # ext:updatesnap
 #   version-format:
 #     no-9x-revisions: true
+    plugin: meson
+    parse-info: [usr/share/metainfo/org.gnome.Calculator.appdata.xml]
+    meson-parameters:
+      - --prefix=/snap/gnome-calculator/current/usr
+      - --buildtype=release
+      - -Dvala_args="--vapidir=$CRAFT_STAGE/usr/share/vala/vapi"
+      - -Ddisable-introspection=true
+    organize:
+      snap/gnome-calculator/current/usr: usr
+    build-packages:
+      - libmpc-dev
+      - libmpfr-dev
+      - libgvc6
+    override-pull: |
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=10)
+    override-build: |
+      # valadoc fails, but we don't need it in the snap anyway
+      sed -i.bak -e "s|subdir('doc')||g" $CRAFT_PART_SRC/meson.build
+      # Don't symlink media it leaves dangling symlinks in the snap
+      sed -i.bak -e 's|media: gnome_calculator_help_media|media: gnome_calculator_help_media, symlink_media: false|g' $CRAFT_PART_SRC/help/meson.build
+      # Use bundled icon rather than themed icon, needed for 18.04
+      sed -i.bak -e 's|Icon=org.gnome.Calculator$|Icon=${SNAP}/meta/gui/org.gnome.Calculator.svg|g' $CRAFT_PART_SRC/data/org.gnome.Calculator.desktop.in
+      mkdir -p $CRAFT_PART_INSTALL/meta/gui/
+      cp $CRAFT_PART_SRC/data/icons/hicolor/scalable/apps/org.gnome.Calculator.svg $CRAFT_PART_INSTALL/meta/gui/
+      craftctl default
+
   # Find files provided by the base and platform snap and ensure they aren't
   # duplicated in this snap
   cleanup:
@@ -64,5 +87,3 @@ parts:
       for snap in "core22" "gtk-common-themes" "gnome-42-2204"; do
         cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$CRAFT_PRIME/{}" \;
       done
-
-
