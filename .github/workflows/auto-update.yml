@@ -13,7 +13,7 @@ jobs:
       - name: Checkout this repo
         uses: actions/checkout@v3
       - name: Run desktop-snaps action  
-        uses: ubuntu/desktop-snaps@add-action
+        uses: ubuntu/desktop-snaps@stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repo: ${{ github.repository }}
