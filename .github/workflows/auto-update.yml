@@ -17,3 +17,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repo: ${{ github.repository }}
+      - name: sanity check
+          run: |
+            pwd
+            ls -l
+      - name: Cleanup
+        run: |
+          rm -rf desktop-snaps
+        shell: bash
