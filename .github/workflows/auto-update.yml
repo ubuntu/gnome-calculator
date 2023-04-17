@@ -25,3 +25,7 @@ jobs:
         run: |
           rm -rf desktop-snaps
         shell: bash
+      - name: sanity check 1
+        run: |
+          pwd
+          ls -l
