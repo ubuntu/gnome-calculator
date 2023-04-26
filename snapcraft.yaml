@@ -45,7 +45,7 @@ apps:
 parts:
   gnome-calculator:
     source: https://gitlab.gnome.org/GNOME/gnome-calculator.git
-    source-tag: '42.2'
+    source-tag: '44.0'
 # ext:updatesnap
 #   version-format:
 #     no-9x-revisions: true
