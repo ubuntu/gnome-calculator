@@ -48,6 +48,7 @@ parts:
     source-tag: '44.0'
 # ext:updatesnap
 #   version-format:
+#     lower-than: '45'
 #     no-9x-revisions: true
     plugin: meson
     parse-info: [usr/share/metainfo/org.gnome.Calculator.appdata.xml]
