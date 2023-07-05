@@ -13,7 +13,7 @@ jobs:
       - name: Checkout this repo
         uses: actions/checkout@v3
       - name: Run desktop-snaps action  
-        uses: ubuntu/desktop-snaps@stable
+        uses: ubuntu/desktop-snaps@UDENG-961-optionally_take_user_as_input
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repo: ${{ github.repository }}
