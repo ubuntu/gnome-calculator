@@ -49,7 +49,7 @@ parts:
     source-depth: 1
 # ext:updatesnap
 #   version-format:
-#     lower-than: '45'
+#     lower-than: '46'
 #     no-9x-revisions: true
     plugin: meson
     parse-info: [usr/share/metainfo/org.gnome.Calculator.appdata.xml]
